@@ -37,7 +37,7 @@ body {
   height: 100%;
   font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+  /* font-smoothing: antialiased; */
 }
 
 h1,
@@ -795,10 +795,23 @@ ol {
   position: relative;
   border-radius: 2px;
   margin-bottom: 40px;
+  transition: all 0.3s ease; /* smooth transition for hover */
 }
 
+/* Pop-up effect on hover */
+.price-item:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* darker shadow */
+  transform: translateY(-10px); /* move up */
+}
+
+/* For the top-rated card */
 .price-item.top-rated {
   margin-top: -36px;
+}
+
+.price-item.top-rated:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+  transform: translateY(-12px);
 }
 
 .price-item .tr-tag {
@@ -896,20 +909,54 @@ ol {
   padding-bottom: 160px;
 }
 
+/* Base style for blog items */
 .latest-item {
   height: 255px;
   position: relative;
   margin-bottom: 40px;
   margin-left: 15px;
   border-radius: 2px;
-  -webkit-box-shadow: 0px 0px 30px rgba(79, 84, 139, 0.15);
   box-shadow: 0px 0px 30px rgba(79, 84, 139, 0.15);
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.35s ease, filter 0.35s ease;
+  cursor: pointer;
 }
 
+/* Larger featured blog post */
 .latest-item.large-item {
   height: 550px;
   margin-right: 15px;
   margin-left: 0;
+}
+
+/* Hover effect: lift + darker shadow + slight brightness */
+.latest-item:hover {
+  transform: translateY(-15px) scale(1.03); /* lift and pop */
+  box-shadow: 0px 25px 50px rgba(79, 84, 139, 0.35); /* stronger shadow */
+  filter: brightness(1.07); /* subtle glow */
+}
+
+/* Optional: gray shine glint effect on hover */
+.latest-item::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.latest-item:hover::before {
+  transform: rotate(25deg) translateX(100%);
 }
 
 .latest-item.large-item .li-tag {
@@ -1134,7 +1181,7 @@ ol {
 -----------------------*/
 
 .footer-section {
-  background: #171822;
+  /* background: #171822; */
   padding-top: 50px;
   padding-bottom: 60px;
 }
@@ -2528,15 +2575,57 @@ ol {
 
 /* Base shadow and smooth transition */
 .tab-pane .st-content {
+  position: relative;
+  overflow: hidden; /* to contain glint */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  cursor: pointer;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-/* Hover effect: darker and more noticeable shadow */
+/* Hover effect: darker shadow and lift */
 .tab-pane .st-content:hover {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
   transform: translateY(-5px);
-  cursor: pointer;
+}
+
+/* Gray glint effect */
+.tab-pane .st-content::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(200, 200, 200, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+/* Animate glint on hover */
+.tab-pane .st-content:hover::before {
+  transform: rotate(25deg) translateX(100%);
+}
+
+.price-list-item > li {
+  color: black;
+  font-weight: 600;
+  list-style: none;
+  display: inline-block;
+  margin-right: 45px;
+  position: relative;
+}
+
+.footer-nav-text > li > a {
+  color: white;
+  font-weight: 600;
+  list-style: none;
+  position: relative;
 }
